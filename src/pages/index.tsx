@@ -1,115 +1,147 @@
-import Image from "next/image";
-import localFont from "next/font/local";
+import { useState } from 'react'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// Mock data for resources
+const resources = [
+  {
+    id: 1,
+    name: "Special Education Support",
+    description: "Provides educational assistance for children with learning disabilities.",
+    location: "New York",
+    assistanceType: "Education",
+    condition: "Learning Disability",
+    contact: "contact@specialedsupport.com"
+  },
+  {
+    id: 2,
+    name: "Autism Therapy Center",
+    description: "Offers therapy and support for children on the autism spectrum.",
+    location: "California",
+    assistanceType: "Therapy",
+    condition: "Autism",
+    contact: "info@autismtherapy.org"
+  },
+  // Add more mock resources here...
+]
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [filteredResources, setFilteredResources] = useState(resources)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [locationFilter, setLocationFilter] = useState("")
+  const [assistanceTypeFilter, setAssistanceTypeFilter] = useState("")
+  const [conditionFilter, setConditionFilter] = useState("")
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value.toLowerCase()
+    setSearchTerm(term)
+    filterResources(term, locationFilter, assistanceTypeFilter, conditionFilter)
+  }
+
+  const filterResources = (search: string, location: string, assistanceType: string, condition: string) => {
+    const filtered = resources.filter(resource =>
+      resource.name.toLowerCase().includes(search) &&
+      (location === "" || resource.location === location) &&
+      (assistanceType === "" || resource.assistanceType === assistanceType) &&
+      (condition === "" || resource.condition === condition)
+    )
+    setFilteredResources(filtered)
+  }
+
+  return (
+    <>
+      <h1 className="text-4xl font-bold text-center mb-8">Resources for Children with Special Health Care Needs</h1>
+      
+      <div className="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div>
+          <Label htmlFor="search">Search</Label>
+          <Input
+            id="search"
+            type="text"
+            placeholder="Search resources..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+        <div>
+          <Label htmlFor="location">Location</Label>
+          <Select onValueChange={(value) => {
+            setLocationFilter(value)
+            filterResources(searchTerm, value, assistanceTypeFilter, conditionFilter)
+          }}>
+            <SelectTrigger id="location">
+              <SelectValue placeholder="Select location" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">All Locations</SelectItem>
+              <SelectItem value="New York">New York</SelectItem>
+              <SelectItem value="California">California</SelectItem>
+              {/* Add more locations as needed */}
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor="assistanceType">Assistance Type</Label>
+          <Select onValueChange={(value) => {
+            setAssistanceTypeFilter(value)
+            filterResources(searchTerm, locationFilter, value, conditionFilter)
+          }}>
+            <SelectTrigger id="assistanceType">
+              <SelectValue placeholder="Select type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">All Types</SelectItem>
+              <SelectItem value="Education">Education</SelectItem>
+              <SelectItem value="Therapy">Therapy</SelectItem>
+              {/* Add more assistance types as needed */}
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor="condition">Condition</Label>
+          <Select onValueChange={(value) => {
+            setConditionFilter(value)
+            filterResources(searchTerm, locationFilter, assistanceTypeFilter, value)
+          }}>
+            <SelectTrigger id="condition">
+              <SelectValue placeholder="Select condition" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">All Conditions</SelectItem>
+              <SelectItem value="Learning Disability">Learning Disability</SelectItem>
+              <SelectItem value="Autism">Autism</SelectItem>
+              {/* Add more conditions as needed */}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredResources.map(resource => (
+          <Card key={resource.id} className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <CardHeader>
+              <CardTitle>{resource.name}</CardTitle>
+              <CardDescription>{resource.location}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">{resource.description}</p>
+              <div className="mt-4">
+                <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 rounded-full uppercase font-semibold  tracking-wide">
+                  {resource.assistanceType}
+                </span>
+                <span className="inline-block bg-green-100 text-green-800 text-xs px-2 rounded-full uppercase font-semibold tracking-wide ml-2">
+                  {resource.condition}
+                </span>
+              </div>
+            </CardContent>
+            <CardFooter>
+              <p className="text-sm text-gray-500">Contact: {resource.contact}</p>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+    </>
+  )
 }
