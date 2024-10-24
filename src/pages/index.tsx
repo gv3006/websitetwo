@@ -22,57 +22,381 @@ interface Resource {
 const resources: Resource[] = [
   {
     id: 1,
-    name: "Autism Support Network",
-    description: "A community-driven support group for families affected by autism.",
-    locations: ["Illinois", "Wisconsin"],
-    assistanceTypes: ["Support Group", "Education"],
-    conditions: ["Autism"],
-    contact: "info@autismsupportnetwork.org"
+    name: "Family Voices",
+    description: "A national organization that advocates for family-centered care and services for children with special healthcare needs. They offer support, resources, and education to empower families.",
+    locations: ["National"],
+    assistanceTypes: ["Advocacy", "Education"],
+    conditions: ["All Conditions"],
+    contact: "info@familyvoices.org"
   },
   {
     id: 2,
-    name: "Cerebral Palsy Foundation",
-    description: "Providing resources and support for individuals with cerebral palsy.",
+    name: "United Cerebral Palsy",
+    description: "United Cerebral Palsy (UCP) provides resources, support, and advocacy for individuals with cerebral palsy and other disabilities. Their services include assistive technology, healthcare resources, and advocacy programs.",
     locations: ["National"],
-    assistanceTypes: ["Advocacy", "Medical"],
+    assistanceTypes: ["Advocacy", "Assistive Technology", "Medical"],
     conditions: ["Cerebral Palsy"],
-    contact: "contact@cpfoundation.org"
+    contact: "info@ucp.org"
   },
   {
     id: 3,
-    name: "Special Education Services",
-    description: "Comprehensive educational support for children with various developmental disabilities.",
-    locations: ["Wisconsin", "Illinois"],
-    assistanceTypes: ["Education", "Care Coordination"],
-    conditions: ["Developmental Disabilities", "Autism"],
-    contact: "info@specialeducationservices.org"
+    name: "Autism Society",
+    description: "A national organization that supports individuals with autism and their families through education, advocacy, and community services. Their mission is to promote lifelong access and opportunities for those on the autism spectrum.",
+    locations: ["National"],
+    assistanceTypes: ["Advocacy", "Education", "Support Group"],
+    conditions: ["Autism"],
+    contact: "info@autismsociety.org"
   },
   {
     id: 4,
-    name: "Limb Difference Support Group",
-    description: "A supportive community for children and families dealing with limb differences.",
-    locations: ["Missouri", "National"],
-    assistanceTypes: ["Support Group", "Advocacy"],
-    conditions: ["Limb Differences"],
-    contact: "support@limbdifference.org"
+    name: "Medical Homes Fact Sheet",
+    description: "A comprehensive resource outlining the concept of medical homes, which provide coordinated healthcare for children with special healthcare needs. It helps families understand how to create and utilize a medical home model.",
+    locations: ["National"],
+    assistanceTypes: ["Education", "Care Coordination"],
+    conditions: ["All Conditions"],
+    contact: "info@medicalhomes.org"
   },
   {
     id: 5,
-    name: "Children's Specialized Hospital",
-    description: "Providing comprehensive medical care for children with special health needs.",
-    locations: ["Massachusetts"],
-    assistanceTypes: ["Medical", "Care Coordination"],
+    name: "Parent Center Hub",
+    description: "A national network of parent training and information centers providing assistance to families of children with disabilities. They offer resources on education, advocacy, and healthcare navigation.",
+    locations: ["National"],
+    assistanceTypes: ["Education", "Advocacy"],
     conditions: ["All Conditions"],
-    contact: "info@childrenspecialized.org"
+    contact: "info@parentcenterhub.org"
   },
   {
     id: 6,
-    name: "Special Needs Resource Directory",
-    description: "A comprehensive directory of resources for families of children with special needs.",
-    locations: ["California", "National"],
-    assistanceTypes: ["Directory", "Education"],
+    name: "Parent to Parent",
+    description: "A support network for parents of children with special healthcare needs, offering peer-to-peer support and information to help navigate challenges related to their children's care.",
+    locations: ["National"],
+    assistanceTypes: ["Support Group", "Advocacy"],
     conditions: ["All Conditions"],
-    contact: "info@specialneedsresources.org"
+    contact: "info@parenttoparent.org"
+  },
+  {
+    id: 7,
+    name: "Family Connections with Pediatrics",
+    description: "An organization providing support and information for families navigating pediatric care, particularly for children with complex healthcare needs. They connect families to resources and medical professionals.",
+    locations: ["National"],
+    assistanceTypes: ["Care Coordination", "Education"],
+    conditions: ["All Conditions"],
+    contact: "info@familyconnections.org"
+  },
+  {
+    id: 8,
+    name: "Autism Resource Directory",
+    description: "A regional resource for families in Illinois, providing a directory of services, support groups, and educational programs for those affected by autism.",
+    locations: ["Illinois"],
+    assistanceTypes: ["Directory", "Education", "Support Group"],
+    conditions: ["Autism"],
+    contact: "info@autismdirectoryil.org"
+  },
+  {
+    id: 9,
+    name: "The Answer Inc.",
+    description: "A community-based organization in Illinois offering advocacy, support, and resources to families affected by autism and other developmental disabilities. They provide workshops, support groups, and recreational programs.",
+    locations: ["Illinois"],
+    assistanceTypes: ["Advocacy", "Support Group", "Education"],
+    conditions: ["Autism", "Developmental Disabilities"],
+    contact: "info@theanswerinc.org"
+  },
+  {
+    id: 10,
+    name: "Chicago Parent Program",
+    description: "An evidence-based parent training program designed to strengthen parenting skills and promote positive behavior in children. Their services include workshops and personalized support for parents.",
+    locations: ["Illinois"],
+    assistanceTypes: ["Education", "Support Group"],
+    conditions: ["Behavioral Issues", "Developmental Disabilities"],
+    contact: "info@chicagoparentprogram.org"
+  },
+  {
+    id: 11,
+    name: "Division of Specialized Care for Children (DSCC)",
+    description: "An Illinois-based program offering care coordination and services for children with chronic health conditions. DSCC helps families navigate healthcare systems and access necessary services.",
+    locations: ["Illinois"],
+    assistanceTypes: ["Care Coordination", "Medical"],
+    conditions: ["Chronic Health Conditions"],
+    contact: "info@dscc.uic.edu"
+  },
+  {
+    id: 12,
+    name: "The Arc of Illinois",
+    description: "A state chapter of The Arc, providing advocacy, resources, and support for individuals with intellectual and developmental disabilities and their families. Their services range from legal advocacy to family support programs.",
+    locations: ["Illinois"],
+    assistanceTypes: ["Advocacy", "Education", "Support Group"],
+    conditions: ["Intellectual Disabilities", "Developmental Disabilities"],
+    contact: "info@thearcofil.org"
+  },
+  {
+    id: 13,
+    name: "Illinois Cares for Kids",
+    description: "A statewide initiative offering resources for parents, caregivers, and educators to support children's growth and development. They provide educational tools, access to child care resources, and support programs.",
+    locations: ["Illinois"],
+    assistanceTypes: ["Education", "Childcare Support"],
+    conditions: ["All Conditions"],
+    contact: "info@illinoiscaresforkids.org"
+  },
+  {
+    id: 14,
+    name: "Special Fathers Network",
+    description: "A peer-to-peer mentoring program designed for fathers raising children with special needs. The network connects dads across Illinois for support, shared experiences, and resources.",
+    locations: ["Illinois"],
+    assistanceTypes: ["Support Group", "Peer Support"],
+    conditions: ["All Conditions"],
+    contact: "info@specialfathersnetwork.org"
+  },
+  {
+    id: 15,
+    name: "Wisconsin Wayfinder",
+    description: "A Wisconsin resource hub for families and caregivers of children with special healthcare needs. They offer information on healthcare services, support groups, and assistance programs.",
+    locations: ["Wisconsin"],
+    assistanceTypes: ["Education", "Care Coordination", "Support Group"],
+    conditions: ["All Conditions"],
+    contact: "info@wisconsinwayfinder.org"
+  },
+  {
+    id: 16,
+    name: "Children’s Resource Centers",
+    description: "Providing resources and support for families of children with disabilities in Wisconsin. Their services include care coordination, educational resources, and family support programs.",
+    locations: ["Wisconsin"],
+    assistanceTypes: ["Care Coordination", "Education"],
+    conditions: ["All Conditions"],
+    contact: "info@childrenresourcecenters.org"
+  },
+  {
+    id: 17,
+    name: "Family Voices of Wisconsin",
+    description: "A state branch of Family Voices, advocating for family-centered healthcare and services for children with special healthcare needs. They provide education, peer support, and resources to families across Wisconsin.",
+    locations: ["Wisconsin"],
+    assistanceTypes: ["Advocacy", "Education", "Support Group"],
+    conditions: ["All Conditions"],
+    contact: "info@familyvoiceswi.org"
+  },
+  {
+    id: 18,
+    name: "The Arc Wisconsin",
+    description: "The Arc Wisconsin provides advocacy, support, and services for individuals with intellectual and developmental disabilities. They offer educational resources, support groups, and legal advocacy for families.",
+    locations: ["Wisconsin"],
+    assistanceTypes: ["Advocacy", "Education", "Support Group"],
+    conditions: ["Intellectual Disabilities", "Developmental Disabilities"],
+    contact: "info@arcwisconsin.org"
+  },
+  {
+    id: 19,
+    name: "Wisconsin Department of Health - CYSHCN",
+    description: "A state program offering services for children and youth with special healthcare needs. The program provides care coordination, information, and referral services for families navigating healthcare systems.",
+    locations: ["Wisconsin"],
+    assistanceTypes: ["Care Coordination", "Medical", "Referral Services"],
+    conditions: ["Chronic Health Conditions", "Developmental Disabilities"],
+    contact: "info@dhs.wisconsin.gov"
+  },
+  {
+    id: 20,
+    name: "Waisman Center - Resources for Families",
+    description: "A research and service center located in Wisconsin, the Waisman Center provides resources for families of children with developmental disabilities and neurodegenerative conditions. Their services include therapy, support groups, and research participation opportunities.",
+    locations: ["Wisconsin"],
+    assistanceTypes: ["Therapy", "Education", "Research"],
+    conditions: ["Developmental Disabilities", "Neurodegenerative Conditions"],
+    contact: "info@waisman.wisc.edu"
+  },
+  {
+    id: 21,
+    name: "United Cerebral Palsy Dane County",
+    description: "Providing resources, advocacy, and support to individuals with cerebral palsy and other disabilities in the Dane County region of Wisconsin. They offer assistive technology, peer support, and therapeutic services.",
+    locations: ["Wisconsin"],
+    assistanceTypes: ["Advocacy", "Assistive Technology", "Therapy"],
+    conditions: ["Cerebral Palsy"],
+    contact: "info@ucpdane.org"
+  },
+  {
+    id: 22,
+    name: "Autism Society of Greater Wisconsin",
+    description: "A regional chapter of the Autism Society, this organization provides resources, advocacy, and support for individuals and families affected by autism. They offer education programs, social groups, and community support.",
+    locations: ["Wisconsin"],
+    assistanceTypes: ["Advocacy", "Education", "Support Group"],
+    conditions: ["Autism"],
+    contact: "info@autismgreaterwi.org"
+  },
+  {
+    id: 23,
+    name: "Well Badger",
+    description: "A resource and referral hotline for Wisconsin families, Well Badger connects individuals with services related to healthcare, childcare, and other family support needs. They offer information on a range of topics, including special healthcare needs.",
+    locations: ["Wisconsin"],
+    assistanceTypes: ["Referral Services", "Education"],
+    conditions: ["All Conditions"],
+    contact: "info@wellbadger.org"
+  },
+  {
+    id: 24,
+    name: "Children with Special Healthcare Needs Program",
+    description: "A Missouri-based program offering support services, care coordination, and resources for families of children with special healthcare needs. They connect families with healthcare providers and advocacy organizations.",
+    locations: ["Missouri"],
+    assistanceTypes: ["Care Coordination", "Advocacy", "Medical"],
+    conditions: ["All Conditions"],
+    contact: "info@cschn.mo.gov"
+  },
+  {
+    id: 25,
+    name: "Missouri Department of Health and Senior Services (CYSHCN)",
+    description: "This state program supports families of children and youth with special healthcare needs in Missouri. They offer care coordination, medical referrals, and educational resources.",
+    locations: ["Missouri"],
+    assistanceTypes: ["Care Coordination", "Medical", "Education"],
+    conditions: ["All Conditions"],
+    contact: "info@health.mo.gov"
+  },
+  {
+    id: 26,
+    name: "Cerebral Palsy Family Network",
+    description: "A Missouri-based organization offering resources, support, and advocacy for families affected by cerebral palsy. They provide information on therapy, assistive technology, and peer support groups.",
+    locations: ["Missouri"],
+    assistanceTypes: ["Advocacy", "Therapy", "Assistive Technology"],
+    conditions: ["Cerebral Palsy"],
+    contact: "info@cpfamilynetwork.org"
+  },
+  {
+    id: 27,
+    name: "Oracle Health Foundation",
+    description: "A foundation supporting healthcare services and programs for children with special healthcare needs in Missouri. They provide funding for medical services, therapy, and assistive devices.",
+    locations: ["Missouri"],
+    assistanceTypes: ["Medical", "Therapy", "Assistive Technology"],
+    conditions: ["All Conditions"],
+    contact: "info@oraclehealth.org"
+  },
+  {
+    id: 28,
+    name: "Missouri Developmental Disabilities Council",
+    description: "A Missouri-based organization advocating for individuals with developmental disabilities and their families. They offer resources, support services, and legal advocacy to improve quality of life.",
+    locations: ["Missouri"],
+    assistanceTypes: ["Advocacy", "Education", "Legal Support"],
+    conditions: ["Developmental Disabilities"],
+    contact: "info@mddc.org"
+  },
+  {
+    id: 29,
+    name: "First Steps Missouri",
+    description: "A statewide program providing early intervention services for infants and toddlers with developmental delays or disabilities. They offer therapy, family support, and educational resources.",
+    locations: ["Missouri"],
+    assistanceTypes: ["Early Intervention", "Therapy", "Family Support"],
+    conditions: ["Developmental Delays", "Developmental Disabilities"],
+    contact: "info@firststeps.org"
+  },
+  {
+    id: 30,
+    name: "MPACT",
+    description: "A Missouri Parent Training and Information Center offering resources, advocacy, and education to parents of children with disabilities. They help families navigate the special education system and provide support services.",
+    locations: ["Missouri"],
+    assistanceTypes: ["Education", "Advocacy", "Support Group"],
+    conditions: ["All Conditions"],
+    contact: "info@mpact.org"
+  },
+  {
+    id: 31,
+    name: "Missouri Department of Social Services",
+    description: "Providing a range of support services for families of children with special needs, including healthcare assistance, financial support, and care coordination. The department helps families access services throughout Missouri.",
+    locations: ["Missouri"],
+    assistanceTypes: ["Care Coordination", "Financial Support", "Medical"],
+    conditions: ["All Conditions"],
+    contact: "info@dss.mo.gov"
+  },
+  {
+    id: 32,
+    name: "State of Missouri Assistive Technology Program",
+    description: "A state program offering assistive technology devices and services to individuals with disabilities. They provide access to equipment, training, and technical assistance to support independence.",
+    locations: ["Missouri"],
+    assistanceTypes: ["Assistive Technology", "Training", "Technical Assistance"],
+    conditions: ["All Conditions"],
+    contact: "info@at.mo.gov"
+  },
+  {
+    id: 33,
+    name: "NeedyMeds",
+    description: "A Massachusetts-based resource providing information on financial assistance for medications, medical supplies, and healthcare services. They connect families with programs that help reduce the cost of medical care.",
+    locations: ["Massachusetts"],
+    assistanceTypes: ["Financial Support", "Medical"],
+    conditions: ["All Conditions"],
+    contact: "info@needymeds.org"
+  },
+  {
+    id: 34,
+    name: "Massachusetts Developmental Disabilities Council",
+    description: "An organization that advocates for individuals with developmental disabilities and their families in Massachusetts. They provide resources, support, and educational programs.",
+    locations: ["Massachusetts"],
+    assistanceTypes: ["Advocacy", "Education", "Support Group"],
+    conditions: ["Developmental Disabilities"],
+    contact: "info@maddc.org"
+  },
+  {
+    id: 35,
+    name: "Assistive Technology Center",
+    description: "Located in Massachusetts, the Assistive Technology Center offers a range of services to support individuals with disabilities in accessing and utilizing assistive technology devices.",
+    locations: ["Massachusetts"],
+    assistanceTypes: ["Assistive Technology", "Training", "Technical Support"],
+    conditions: ["All Conditions"],
+    contact: "info@atcenter.org"
+  },
+  {
+    id: 36,
+    name: "Easter Seals Massachusetts",
+    description: "A nonprofit organization offering a range of services, including assistive technology, therapeutic programs, and advocacy for children and adults with disabilities in Massachusetts.",
+    locations: ["Massachusetts"],
+    assistanceTypes: ["Assistive Technology", "Therapy", "Advocacy"],
+    conditions: ["Physical Disabilities", "Developmental Disabilities"],
+    contact: "info@eastersealsma.org"
+  },
+  {
+    id: 37,
+    name: "Association for Autism and Neurodivergence",
+    description: "A Massachusetts-based organization providing resources, support, and advocacy for individuals on the autism spectrum. They offer educational programs, social groups, and family support services.",
+    locations: ["Massachusetts"],
+    assistanceTypes: ["Education", "Advocacy", "Support Group"],
+    conditions: ["Autism", "Neurodivergence"],
+    contact: "info@autismandneurodivergence.org"
+  },
+  {
+    id: 38,
+    name: "Federation for Children with Special Needs",
+    description: "An organization in Massachusetts that provides information, support, and advocacy for families of children with special needs. They offer workshops, peer support, and educational resources.",
+    locations: ["Massachusetts"],
+    assistanceTypes: ["Advocacy", "Education", "Support Group"],
+    conditions: ["All Conditions"],
+    contact: "info@fcsn.org"
+  },
+  {
+    id: 39,
+    name: "Disabled Resources Center",
+    description: "A California-based organization offering resources and support to individuals with disabilities. They focus on providing access to assistive technology, advocacy services, and independent living programs.",
+    locations: ["California"],
+    assistanceTypes: ["Assistive Technology", "Advocacy", "Independent Living Support"],
+    conditions: ["All Conditions"],
+    contact: "info@drc.org"
+  },
+  {
+    id: 40,
+    name: "Autism Care Today",
+    description: "A California-based nonprofit organization providing financial assistance to families of children with autism. They offer grants for treatment, therapy, and special programs for children on the autism spectrum.",
+    locations: ["California"],
+    assistanceTypes: ["Financial Support", "Therapy"],
+    conditions: ["Autism"],
+    contact: "info@autismcaretday.org"
+  },
+  {
+    id: 41,
+    name: "Variety The Children's Charity",
+    description: "A California-based organization offering resources and financial support to children with special needs. They provide funding for medical care, equipment, and therapy for children with disabilities.",
+    locations: ["California"],
+    assistanceTypes: ["Financial Support", "Medical", "Assistive Technology"],
+    conditions: ["All Conditions"],
+    contact: "info@varietyca.org"
+  },
+  {
+    id: 42,
+    name: "Lucky Fin Project",
+    description: "A national nonprofit organization providing support, resources, and advocacy for individuals with limb differences. They offer community support, financial assistance, and awareness programs.",
+    locations: ["National"],
+    assistanceTypes: ["Advocacy", "Support Group", "Financial Support"],
+    conditions: ["Limb Differences"],
+    contact: "info@luckyfinproject.org"
   }
 ]
 
@@ -201,13 +525,16 @@ export default function Home() {
                     <SelectValue placeholder="Select Assistance Type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="All Types">All Types</SelectItem>
-                    <SelectItem value="Support Group">Support Group</SelectItem>
-                    <SelectItem value="Advocacy">Advocacy</SelectItem>
-                    <SelectItem value="Education">Education</SelectItem>
-                    <SelectItem value="Medical">Medical</SelectItem>
-                    <SelectItem value="Directory">Directory</SelectItem>
-                    <SelectItem value="Care Coordination">Care Coordination</SelectItem>
+                  <SelectItem value="All Types">All Types</SelectItem>
+      <SelectItem value="Support Group">Support Group</SelectItem>
+      <SelectItem value="Advocacy">Advocacy</SelectItem>
+      <SelectItem value="Education">Education</SelectItem>
+      <SelectItem value="Medical">Medical</SelectItem>
+      <SelectItem value="Directory">Directory</SelectItem>
+      <SelectItem value="Care Coordination">Care Coordination</SelectItem>
+      <SelectItem value="Assistive Technology">Assistive Technology</SelectItem>
+      <SelectItem value="Therapy">Therapy</SelectItem>
+      <SelectItem value="Financial Support">Financial Support</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -224,11 +551,13 @@ export default function Home() {
                     <SelectValue placeholder="Select Condition" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="All Conditions">All Conditions</SelectItem>
-                    <SelectItem value="Autism">Autism</SelectItem>
-                    <SelectItem value="Cerebral Palsy">Cerebral Palsy</SelectItem>
-                    <SelectItem value="Developmental Disabilities">Developmental Disabilities</SelectItem>
-                    <SelectItem value="Limb Differences">Limb Differences</SelectItem>
+                  <SelectItem value="All Conditions">All Conditions</SelectItem>
+      <SelectItem value="Autism">Autism</SelectItem>
+      <SelectItem value="Cerebral Palsy">Cerebral Palsy</SelectItem>
+      <SelectItem value="Developmental Disabilities">Developmental Disabilities</SelectItem>
+      <SelectItem value="Limb Differences">Limb Differences</SelectItem>
+      <SelectItem value="Chronic Health Conditions">Chronic Health Conditions</SelectItem>
+      <SelectItem value="Neurodivergence">Neurodivergence</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
