@@ -50,7 +50,7 @@ export default function About() {
         >
           <h1 className="text-4xl font-bold mb-4 text-white">About Our Mission</h1>
           <p className="text-xl text-white max-w-2xl mx-auto">
-            We're dedicated to connecting families of children with special health care needs to vital resources and support.
+                We're dedicated to connecting families of children with special health care needs to vital resources and support.
           </p>
         </motion.section>
 
@@ -66,7 +66,7 @@ export default function About() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-800">
-                  We are a dedicated team of professionals, caregivers, and advocates who understand the unique challenges faced by families of children with special health care needs. Our diverse backgrounds and personal experiences drive our passion to make a difference in the lives of these families.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 </p>
               </CardContent>
             </Card>
