@@ -516,7 +516,7 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500"
+        className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-500 to-teal-400"
       >
         <motion.div
           className="absolute inset-0 z-0"
