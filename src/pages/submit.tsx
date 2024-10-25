@@ -53,7 +53,7 @@ export default function SubmitResource() {
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
         style={{
-          background: 'linear-gradient(to right, rgba(168, 85, 247, 0.7), rgba(236, 72, 153, 0.7))',
+          background: 'linear-gradient(to right, rgba(168, 85, 247, 1), rgba(236, 72, 153, 0.7))',
         }}
       >
         {[...Array(100)].map((_, i) => (

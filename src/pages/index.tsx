@@ -445,6 +445,17 @@ const resources: Resource[] = [
   }
 ]
 
+const kidThemedItems = [
+  { emoji: "🧸", name: "Teddy Bear" },
+  { emoji: "🎈", name: "Balloon" },
+  { emoji: "🚂", name: "Toy Train" },
+  { emoji: "🏀", name: "Basketball" },
+  { emoji: "🎨", name: "Paint Palette" },
+  { emoji: "🧩", name: "Puzzle Piece" },
+  { emoji: "📚", name: "Books" },
+  { emoji: "🦸", name: "Superhero" },
+]
+
 export default function Home() {
   const [filteredResources, setFilteredResources] = useState(resources)
   const [searchTerm, setSearchTerm] = useState("")
@@ -452,7 +463,18 @@ export default function Home() {
   const [assistanceTypeFilter, setAssistanceTypeFilter] = useState("All Types")
   const [conditionFilter, setConditionFilter] = useState("All Conditions")
   const resourcesRef = useRef<HTMLDivElement>(null)
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight })
+    }
+
+    handleResize() // Set initial size
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value.toLowerCase()
@@ -524,6 +546,45 @@ export default function Home() {
             />
           ))}
         </motion.div>
+
+        {/* Kid-themed floating items with random spawn locations and movement directions */}
+        {kidThemedItems.map((item, index) => {
+          const randomX = Math.random() * windowSize.width
+          const randomY = Math.random() * windowSize.height - 700
+          const randomAngle = Math.random() * 2 * Math.PI
+          const speed = 100 + Math.random() * 200 // Random speed between 100 and 300
+
+          return (
+            <motion.div
+              key={index}
+              className="absolute text-4xl"
+              initial={{
+                x: randomX,
+                y: randomY,
+                opacity: 0,
+              }}
+              animate={{
+                x: randomX + Math.cos(randomAngle) * speed,
+                y: randomY + Math.sin(randomAngle) * speed,
+                rotate: [0, 360],
+                opacity: 1,
+              }}
+              transition={{
+                duration: 10 + Math.random() * 20,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "linear",
+                opacity: { duration: 1 },
+              }}
+              style={{
+                zIndex: 1,
+              }}
+            >
+              <span role="img" aria-label={item.name}>{item.emoji}</span>
+            </motion.div>
+          )
+        })}
+
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <motion.h1
             className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
@@ -699,6 +760,7 @@ export default function Home() {
                           </div>
                         </div>
                         <div className="flex flex-col space-y-2">
+                          
                           <Button className="w-full">Contact: {resource.contact}</Button>
                           <Link 
                             href={resource.link} 
@@ -776,7 +838,7 @@ export default function Home() {
           className="bg-gray-100 dark:bg-gray-800 py-12 rounded-lg"
         >
           <div className="container mx-auto">
-            <h2  className="text-3xl font-bold text-center mb-8">What Caregivers Say</h2>
+            <h2 className="text-3xl font-bold text-center mb-8">What Caregivers Say</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((i) => (
                 <motion.div
