@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Label } from "@/components/ui/label"
+import Link from 'next/link'
+import { ExternalLink } from 'lucide-react'
 
 interface Resource {
   id: number
@@ -17,6 +19,7 @@ interface Resource {
   assistanceTypes: string[]
   conditions: string[]
   contact: string
+  link: string
 }
 
 const resources: Resource[] = [
@@ -27,7 +30,8 @@ const resources: Resource[] = [
     locations: ["National"],
     assistanceTypes: ["Advocacy", "Education"],
     conditions: ["All Conditions"],
-    contact: "info@familyvoices.org"
+    contact: "info@familyvoices.org",
+    link: "https://familyvoices.org"
   },
   {
     id: 2,
@@ -36,7 +40,8 @@ const resources: Resource[] = [
     locations: ["National"],
     assistanceTypes: ["Advocacy", "Assistive Technology", "Medical"],
     conditions: ["Cerebral Palsy"],
-    contact: "info@ucp.org"
+    contact: "info@ucp.org",
+    link: "https://ucp.org"
   },
   {
     id: 3,
@@ -45,7 +50,8 @@ const resources: Resource[] = [
     locations: ["National"],
     assistanceTypes: ["Advocacy", "Education", "Support Group"],
     conditions: ["Autism"],
-    contact: "info@autismsociety.org"
+    contact: "info@autismsociety.org",
+    link: "https://autismsociety.org"
   },
   {
     id: 4,
@@ -54,7 +60,8 @@ const resources: Resource[] = [
     locations: ["National"],
     assistanceTypes: ["Education", "Care Coordination"],
     conditions: ["All Conditions"],
-    contact: "info@medicalhomes.org"
+    contact: "info@medicalhomes.org",
+    link: "https://medicalhomes.org"
   },
   {
     id: 5,
@@ -63,7 +70,8 @@ const resources: Resource[] = [
     locations: ["National"],
     assistanceTypes: ["Education", "Advocacy"],
     conditions: ["All Conditions"],
-    contact: "info@parentcenterhub.org"
+    contact: "info@parentcenterhub.org",
+    link: "https://parentcenterhub.org"
   },
   {
     id: 6,
@@ -72,7 +80,8 @@ const resources: Resource[] = [
     locations: ["National"],
     assistanceTypes: ["Support Group", "Advocacy"],
     conditions: ["All Conditions"],
-    contact: "info@parenttoparent.org"
+    contact: "info@parenttoparent.org",
+    link: "https://parenttoparent.org"
   },
   {
     id: 7,
@@ -81,7 +90,8 @@ const resources: Resource[] = [
     locations: ["National"],
     assistanceTypes: ["Care Coordination", "Education"],
     conditions: ["All Conditions"],
-    contact: "info@familyconnections.org"
+    contact: "info@familyconnections.org",
+    link: "https://familyconnections.org"
   },
   {
     id: 8,
@@ -90,7 +100,8 @@ const resources: Resource[] = [
     locations: ["Illinois"],
     assistanceTypes: ["Directory", "Education", "Support Group"],
     conditions: ["Autism"],
-    contact: "info@autismdirectoryil.org"
+    contact: "info@autismdirectoryil.org",
+    link: "https://autismdirectoryil.org"
   },
   {
     id: 9,
@@ -99,7 +110,8 @@ const resources: Resource[] = [
     locations: ["Illinois"],
     assistanceTypes: ["Advocacy", "Support Group", "Education"],
     conditions: ["Autism", "Developmental Disabilities"],
-    contact: "info@theanswerinc.org"
+    contact: "info@theanswerinc.org",
+    link: "https://theanswerinc.org"
   },
   {
     id: 10,
@@ -108,7 +120,8 @@ const resources: Resource[] = [
     locations: ["Illinois"],
     assistanceTypes: ["Education", "Support Group"],
     conditions: ["Behavioral Issues", "Developmental Disabilities"],
-    contact: "info@chicagoparentprogram.org"
+    contact: "info@chicagoparentprogram.org",
+    link: "https://chicagoparentprogram.org"
   },
   {
     id: 11,
@@ -117,7 +130,8 @@ const resources: Resource[] = [
     locations: ["Illinois"],
     assistanceTypes: ["Care Coordination", "Medical"],
     conditions: ["Chronic Health Conditions"],
-    contact: "info@dscc.uic.edu"
+    contact: "info@dscc.uic.edu",
+    link: "https://dscc.uic.edu"
   },
   {
     id: 12,
@@ -126,7 +140,8 @@ const resources: Resource[] = [
     locations: ["Illinois"],
     assistanceTypes: ["Advocacy", "Education", "Support Group"],
     conditions: ["Intellectual Disabilities", "Developmental Disabilities"],
-    contact: "info@thearcofil.org"
+    contact: "info@thearcofil.org",
+    link: "https://thearcofil.org"
   },
   {
     id: 13,
@@ -135,7 +150,8 @@ const resources: Resource[] = [
     locations: ["Illinois"],
     assistanceTypes: ["Education", "Childcare Support"],
     conditions: ["All Conditions"],
-    contact: "info@illinoiscaresforkids.org"
+    contact: "info@illinoiscaresforkids.org",
+    link: "https://illinoiscaresforkids.org"
   },
   {
     id: 14,
@@ -144,7 +160,8 @@ const resources: Resource[] = [
     locations: ["Illinois"],
     assistanceTypes: ["Support Group", "Peer Support"],
     conditions: ["All Conditions"],
-    contact: "info@specialfathersnetwork.org"
+    contact: "info@specialfathersnetwork.org",
+    link: "https://specialfathersnetwork.org"
   },
   {
     id: 15,
@@ -153,7 +170,8 @@ const resources: Resource[] = [
     locations: ["Wisconsin"],
     assistanceTypes: ["Education", "Care Coordination", "Support Group"],
     conditions: ["All Conditions"],
-    contact: "info@wisconsinwayfinder.org"
+    contact: "info@wisconsinwayfinder.org",
+    link: "https://wisconsinwayfinder.org"
   },
   {
     id: 16,
@@ -162,7 +180,8 @@ const resources: Resource[] = [
     locations: ["Wisconsin"],
     assistanceTypes: ["Care Coordination", "Education"],
     conditions: ["All Conditions"],
-    contact: "info@childrenresourcecenters.org"
+    contact: "info@childrenresourcecenters.org",
+    link: "https://childrenresourcecenters.org"
   },
   {
     id: 17,
@@ -171,7 +190,8 @@ const resources: Resource[] = [
     locations: ["Wisconsin"],
     assistanceTypes: ["Advocacy", "Education", "Support Group"],
     conditions: ["All Conditions"],
-    contact: "info@familyvoiceswi.org"
+    contact: "info@familyvoiceswi.org",
+    link: "https://familyvoiceswi.org"
   },
   {
     id: 18,
@@ -180,7 +200,8 @@ const resources: Resource[] = [
     locations: ["Wisconsin"],
     assistanceTypes: ["Advocacy", "Education", "Support Group"],
     conditions: ["Intellectual Disabilities", "Developmental Disabilities"],
-    contact: "info@arcwisconsin.org"
+    contact: "info@arcwisconsin.org",
+    link: "https://arcwisconsin.org"
   },
   {
     id: 19,
@@ -189,7 +210,8 @@ const resources: Resource[] = [
     locations: ["Wisconsin"],
     assistanceTypes: ["Care Coordination", "Medical", "Referral Services"],
     conditions: ["Chronic Health Conditions", "Developmental Disabilities"],
-    contact: "info@dhs.wisconsin.gov"
+    contact: "info@dhs.wisconsin.gov",
+    link: "https://dhs.wisconsin.gov"
   },
   {
     id: 20,
@@ -198,7 +220,8 @@ const resources: Resource[] = [
     locations: ["Wisconsin"],
     assistanceTypes: ["Therapy", "Education", "Research"],
     conditions: ["Developmental Disabilities", "Neurodegenerative Conditions"],
-    contact: "info@waisman.wisc.edu"
+    contact: "info@waisman.wisc.edu",
+    link: "https://waisman.wisc.edu"
   },
   {
     id: 21,
@@ -207,7 +230,8 @@ const resources: Resource[] = [
     locations: ["Wisconsin"],
     assistanceTypes: ["Advocacy", "Assistive Technology", "Therapy"],
     conditions: ["Cerebral Palsy"],
-    contact: "info@ucpdane.org"
+    contact: "info@ucpdane.org",
+    link: "https://ucpdane.org"
   },
   {
     id: 22,
@@ -216,7 +240,8 @@ const resources: Resource[] = [
     locations: ["Wisconsin"],
     assistanceTypes: ["Advocacy", "Education", "Support Group"],
     conditions: ["Autism"],
-    contact: "info@autismgreaterwi.org"
+    contact: "info@autismgreaterwi.org",
+    link: "https://autismgreaterwi.org"
   },
   {
     id: 23,
@@ -225,7 +250,8 @@ const resources: Resource[] = [
     locations: ["Wisconsin"],
     assistanceTypes: ["Referral Services", "Education"],
     conditions: ["All Conditions"],
-    contact: "info@wellbadger.org"
+    contact: "info@wellbadger.org",
+    link: "https://wellbadger.org"
   },
   {
     id: 24,
@@ -234,7 +260,8 @@ const resources: Resource[] = [
     locations: ["Missouri"],
     assistanceTypes: ["Care Coordination", "Advocacy", "Medical"],
     conditions: ["All Conditions"],
-    contact: "info@cschn.mo.gov"
+    contact: "info@cschn.mo.gov",
+    link: "https://cschn.mo.gov"
   },
   {
     id: 25,
@@ -243,7 +270,8 @@ const resources: Resource[] = [
     locations: ["Missouri"],
     assistanceTypes: ["Care Coordination", "Medical", "Education"],
     conditions: ["All Conditions"],
-    contact: "info@health.mo.gov"
+    contact: "info@health.mo.gov",
+    link: "https://health.mo.gov"
   },
   {
     id: 26,
@@ -252,7 +280,8 @@ const resources: Resource[] = [
     locations: ["Missouri"],
     assistanceTypes: ["Advocacy", "Therapy", "Assistive Technology"],
     conditions: ["Cerebral Palsy"],
-    contact: "info@cpfamilynetwork.org"
+    contact: "info@cpfamilynetwork.org",
+    link: "https://cpfamilynetwork.org"
   },
   {
     id: 27,
@@ -261,7 +290,8 @@ const resources: Resource[] = [
     locations: ["Missouri"],
     assistanceTypes: ["Medical", "Therapy", "Assistive Technology"],
     conditions: ["All Conditions"],
-    contact: "info@oraclehealth.org"
+    contact: "info@oraclehealth.org",
+    link: "https://oraclehealth.org"
   },
   {
     id: 28,
@@ -270,7 +300,8 @@ const resources: Resource[] = [
     locations: ["Missouri"],
     assistanceTypes: ["Advocacy", "Education", "Legal Support"],
     conditions: ["Developmental Disabilities"],
-    contact: "info@mddc.org"
+    contact: "info@mddc.org",
+    link: "https://mddc.org"
   },
   {
     id: 29,
@@ -279,7 +310,8 @@ const resources: Resource[] = [
     locations: ["Missouri"],
     assistanceTypes: ["Early Intervention", "Therapy", "Family Support"],
     conditions: ["Developmental Delays", "Developmental Disabilities"],
-    contact: "info@firststeps.org"
+    contact: "info@firststeps.org",
+    link: "https://firststeps.org"
   },
   {
     id: 30,
@@ -288,7 +320,8 @@ const resources: Resource[] = [
     locations: ["Missouri"],
     assistanceTypes: ["Education", "Advocacy", "Support Group"],
     conditions: ["All Conditions"],
-    contact: "info@mpact.org"
+    contact: "info@mpact.org",
+    link: "https://mpact.org"
   },
   {
     id: 31,
@@ -297,7 +330,8 @@ const resources: Resource[] = [
     locations: ["Missouri"],
     assistanceTypes: ["Care Coordination", "Financial Support", "Medical"],
     conditions: ["All Conditions"],
-    contact: "info@dss.mo.gov"
+    contact: "info@dss.mo.gov",
+    link: "https://dss.mo.gov"
   },
   {
     id: 32,
@@ -306,7 +340,8 @@ const resources: Resource[] = [
     locations: ["Missouri"],
     assistanceTypes: ["Assistive Technology", "Training", "Technical Assistance"],
     conditions: ["All Conditions"],
-    contact: "info@at.mo.gov"
+    contact: "info@at.mo.gov",
+    link: "https://at.mo.gov"
   },
   {
     id: 33,
@@ -315,7 +350,8 @@ const resources: Resource[] = [
     locations: ["Massachusetts"],
     assistanceTypes: ["Financial Support", "Medical"],
     conditions: ["All Conditions"],
-    contact: "info@needymeds.org"
+    contact: "info@needymeds.org",
+    link: "https://needymeds.org"
   },
   {
     id: 34,
@@ -324,7 +360,8 @@ const resources: Resource[] = [
     locations: ["Massachusetts"],
     assistanceTypes: ["Advocacy", "Education", "Support Group"],
     conditions: ["Developmental Disabilities"],
-    contact: "info@maddc.org"
+    contact: "info@maddc.org",
+    link: "https://maddc.org"
   },
   {
     id: 35,
@@ -333,7 +370,8 @@ const resources: Resource[] = [
     locations: ["Massachusetts"],
     assistanceTypes: ["Assistive Technology", "Training", "Technical Support"],
     conditions: ["All Conditions"],
-    contact: "info@atcenter.org"
+    contact: "info@atcenter.org",
+    link: "https://atcenter.org"
   },
   {
     id: 36,
@@ -342,7 +380,8 @@ const resources: Resource[] = [
     locations: ["Massachusetts"],
     assistanceTypes: ["Assistive Technology", "Therapy", "Advocacy"],
     conditions: ["Physical Disabilities", "Developmental Disabilities"],
-    contact: "info@eastersealsma.org"
+    contact: "info@eastersealsma.org",
+    link: "https://eastersealsma.org"
   },
   {
     id: 37,
@@ -351,7 +390,8 @@ const resources: Resource[] = [
     locations: ["Massachusetts"],
     assistanceTypes: ["Education", "Advocacy", "Support Group"],
     conditions: ["Autism", "Neurodivergence"],
-    contact: "info@autismandneurodivergence.org"
+    contact: "info@autismandneurodivergence.org",
+    link: "https://autismandneurodivergence.org"
   },
   {
     id: 38,
@@ -360,7 +400,8 @@ const resources: Resource[] = [
     locations: ["Massachusetts"],
     assistanceTypes: ["Advocacy", "Education", "Support Group"],
     conditions: ["All Conditions"],
-    contact: "info@fcsn.org"
+    contact: "info@fcsn.org",
+    link: "https://fcsn.org"
   },
   {
     id: 39,
@@ -369,7 +410,8 @@ const resources: Resource[] = [
     locations: ["California"],
     assistanceTypes: ["Assistive Technology", "Advocacy", "Independent Living Support"],
     conditions: ["All Conditions"],
-    contact: "info@drc.org"
+    contact: "info@drc.org",
+    link: "https://drc.org"
   },
   {
     id: 40,
@@ -378,7 +420,8 @@ const resources: Resource[] = [
     locations: ["California"],
     assistanceTypes: ["Financial Support", "Therapy"],
     conditions: ["Autism"],
-    contact: "info@autismcaretday.org"
+    contact: "info@autismcaretday.org",
+    link: "https://autismcaretday.org"
   },
   {
     id: 41,
@@ -387,7 +430,8 @@ const resources: Resource[] = [
     locations: ["California"],
     assistanceTypes: ["Financial Support", "Medical", "Assistive Technology"],
     conditions: ["All Conditions"],
-    contact: "info@varietyca.org"
+    contact: "info@varietyca.org",
+    link: "https://varietyca.org"
   },
   {
     id: 42,
@@ -396,7 +440,8 @@ const resources: Resource[] = [
     locations: ["National"],
     assistanceTypes: ["Advocacy", "Support Group", "Financial Support"],
     conditions: ["Limb Differences"],
-    contact: "info@luckyfinproject.org"
+    contact: "info@luckyfinproject.org",
+    link: "https://luckyfinproject.org"
   }
 ]
 
@@ -452,12 +497,14 @@ export default function Home() {
         </div>
         <motion.div
           animate={{
-            scale: [1, 1.2, 1.2, 1, 1],
-            rotate: [0, 0, 270, 270, 0],
+            scale: [1, 1.2, 1.5, 1, 1],
+            rotate: [25, 0, 270, 270, 25],
             borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+            x: [0, -100, -200, -60, 0], // Adjust these values to move further along the x-axis
+            y: [0, 50, -50, 300, 0],  // Adjust these values to move further along the y-axis
           }}
           transition={{
-            duration: 20,
+            duration: 35,
             ease: "easeInOut",
             times: [0, 0.2, 0.5, 0.8, 1],
             repeat: Infinity,
@@ -587,7 +634,7 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Card className="h-full shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer">
+                  <Card className="h-full shadow-md hover:shadow-xl transition-all duration-300">
                     <CardHeader>
                       <CardTitle>{resource.name}</CardTitle>
                     </CardHeader>
@@ -607,7 +654,18 @@ export default function Home() {
                           {renderTags(resource.conditions, "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300")}
                         </div>
                       </div>
-                      <Button className="w-full">Contact: {resource.contact}</Button>
+                      <div className="flex flex-col space-y-2">
+                        <Button className="w-full">Contact: {resource.contact}</Button>
+                        <Link 
+                          href={resource.link} 
+                          className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 font-medium flex items-center justify-center transition-colors duration-200"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {new URL(resource.link).hostname}
+                          <ExternalLink className="ml-1 h-4 w-4" />
+                        </Link>
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -625,7 +683,7 @@ export default function Home() {
                   whileHover={{ scale: 1.02, x: 10 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Card className="shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer">
+                  <Card className="shadow-md hover:shadow-xl transition-all duration-300">
                     <CardHeader>
                       <CardTitle>{resource.name}</CardTitle>
                     </CardHeader>
@@ -645,7 +703,18 @@ export default function Home() {
                           {renderTags(resource.conditions, "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300")}
                         </div>
                       </div>
-                      <Button className="mt-4">Contact: {resource.contact}</Button>
+                      <div className="flex flex-col space-y-2 mt-4">
+                        <Button className="w-full">Contact: {resource.contact}</Button>
+                        <Link 
+                          href={resource.link} 
+                          className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 font-medium flex items-center justify-center transition-colors duration-200"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {new URL(resource.link).hostname}
+                          <ExternalLink className="ml-1 h-4 w-4" />
+                        </Link>
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -664,7 +733,7 @@ export default function Home() {
         className="bg-gray-100 dark:bg-gray-800 py-12 rounded-lg"
       >
         <div className="container mx-auto">
-          <h2  className="text-3xl font-bold text-center mb-8">What Parents Say</h2>
+          <h2  className="text-3xl font-bold text-center mb-8">What Caregivers Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
               <motion.div
@@ -677,8 +746,8 @@ export default function Home() {
               >
                 <Card className="bg-white dark:bg-gray-700 cursor-pointer">
                   <CardContent className="pt-6">
-                    <p className="italic mb-4">"This website has been a lifesaver for our family. We found resources we didn't even know existed!"</p>
-                    <p className="font-semibold">- Parent {i}</p>
+                    <p className="italic mb-4">"Lorem ipsum odor amet, consectetuer adipiscing elit. Consectetur elementum porta, varius nostra aenean morbi. Pharetra arcu duis phasellus volutpat natoque elit ante facilisi."</p>
+                    <p className="font-semibold">- Caregiver {i}</p>
                   </CardContent>
                 </Card>
               </motion.div>

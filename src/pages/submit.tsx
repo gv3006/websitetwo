@@ -110,7 +110,7 @@ export default function SubmitResource() {
               <div className="space-y-2">
                 <Label>Assistance Types</Label>
                 <div className="grid grid-cols-2 gap-4">
-                  {['Support Group', 'Advocacy', 'Education', 'Medical', 'Directory'].map((type) => (
+                  {['Support Group', 'Advocacy', 'Education', 'Medical', 'Directory', 'Care Coordination', 'Assistive Technology', 'Therapy', 'Financial Support'].map((type) => (
                     <div key={type} className="flex items-center space-x-2">
                       <Checkbox
                         id={`assistanceType-${type}`}
@@ -125,7 +125,7 @@ export default function SubmitResource() {
               <div className="space-y-2">
                 <Label>Conditions</Label>
                 <div className="grid grid-cols-2 gap-4">
-                  {['Autism', 'Cerebral Palsy', 'Developmental Disabilities', 'Limb Differences', 'All Conditions'].map((condition) => (
+                  {['Autism', 'Cerebral Palsy', 'Developmental Disabilities', 'Limb Differences', 'Chronic Health Conditions','All Conditions', 'Neurodivergence'].map((condition) => (
                     <div key={condition} className="flex items-center space-x-2">
                       <Checkbox
                         id={`condition-${condition}`}
