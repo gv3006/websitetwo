@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -9,6 +9,16 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
+
+const generateParticles = (count: number) => {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    size: Math.random() * 8,
+    top: Math.random() * 100,
+    left: Math.random() * 100,
+    duration: Math.random() * 2 + 3,
+  }))
+}
 
 export default function SubmitResource() {
   const [formData, setFormData] = useState({
@@ -20,29 +30,31 @@ export default function SubmitResource() {
     contact: '',
   })
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
-  }
+  }, [])
 
-  const handleSelectChange = (name: string) => (value: string) => {
+  const handleSelectChange = useCallback((name: string) => (value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }))
-  }
+  }, [])
 
-  const handleCheckboxChange = (name: string, category: 'assistanceTypes' | 'conditions') => (checked: boolean) => {
+  const handleCheckboxChange = useCallback((name: string, category: 'assistanceTypes' | 'conditions') => (checked: boolean) => {
     setFormData(prev => ({
       ...prev,
       [category]: checked
         ? [...prev[category], name]
         : prev[category].filter(item => item !== name)
     }))
-  }
+  }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
     console.log('Form submitted:', formData)
     // Here you would typically send the data to your backend
-  }
+  }, [formData])
+
+  const particles = useMemo(() => generateParticles(100), [])
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -56,22 +68,22 @@ export default function SubmitResource() {
           background: 'linear-gradient(to right, rgba(168, 85, 247, 1), rgba(236, 72, 153, 0.7))',
         }}
       >
-        {[...Array(100)].map((_, i) => (
+        {particles.map((particle) => (
           <motion.div
-            key={i}
+            key={particle.id}
             className="absolute bg-white rounded-full"
             style={{
-              width: Math.random() * 8 + 'px',
-              height: Math.random() * 8 + 'px',
-              top: Math.random() * 100 + '%',
-              left: Math.random() * 100 + '%',
+              width: particle.size + 'px',
+              height: particle.size + 'px',
+              top: particle.top + '%',
+              left: particle.left + '%',
             }}
             animate={{
               y: [0, -30, 0],
               opacity: [0, 0.8, 0],
             }}
             transition={{
-              duration: Math.random() * 2 + 3,
+              duration: particle.duration,
               repeat: Infinity,
               ease: "easeInOut",
             }}
