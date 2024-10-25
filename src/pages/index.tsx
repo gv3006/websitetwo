@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from "framer-motion"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
@@ -451,6 +451,8 @@ export default function Home() {
   const [locationFilter, setLocationFilter] = useState("All Locations")
   const [assistanceTypeFilter, setAssistanceTypeFilter] = useState("All Types")
   const [conditionFilter, setConditionFilter] = useState("All Conditions")
+  const resourcesRef = useRef<HTMLDivElement>(null)
+
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value.toLowerCase()
@@ -478,302 +480,344 @@ export default function Home() {
     </div>
   )
 
+  const scrollToResources = () => {
+    if (resourcesRef.current) {
+      const yOffset = -50; // Adjust this value based on your top bar height
+      const y = resourcesRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
+
   return (
-    <div className="space-y-12">
+    <>
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="bg-gradient-to-r from-blue-600 to-purple-600 py-20 rounded-3xl shadow-xl text-white overflow-hidden relative"
+        className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500"
       >
-        <div className="container mx-auto text-center relative z-10">
-          <h1 className="text-5xl font-extrabold mb-4">
-            Resources for Children with Special Health Care Needs
-          </h1>
-          <p className="text-xl mt-4 max-w-2xl mx-auto">
-            Finding resources and services should be easy.<br />Let's make that happen <strong>together</strong>.
-          </p>
-          <Button size="lg" className="mt-8">Get Started</Button>
-        </div>
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1.5, 1, 1],
-            rotate: [25, 0, 270, 270, 25],
-            borderRadius: ["20%", "20%", "50%", "50%", "20%"],
-            x: [0, -100, -200, -60, 0], // Adjust these values to move further along the x-axis
-            y: [0, 50, -50, 300, 0],  // Adjust these values to move further along the y-axis
-          }}
-          transition={{
-            duration: 35,
-            ease: "easeInOut",
-            times: [0, 0.2, 0.5, 0.8, 1],
-            repeat: Infinity,
-            repeatDelay: 1
-          }}
-          className="absolute -top-16 -right-16 w-64 h-64 bg-blue-500 opacity-50 rounded-full"
-        />
+          className="absolute inset-0 z-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2 }}
+        >
+          {[...Array(50)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute bg-white rounded-full"
+              style={{
+                width: Math.random() * 5 + 'px',
+                height: Math.random() * 5 + 'px',
+                top: Math.random() * 100 + '%',
+                left: Math.random() * 100 + '%',
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: Math.random() * 2 + 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </motion.div>
+        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Resources for Children with Special Health Care Needs
+          </motion.h1>
+          <motion.p
+            className="text-lg sm:text-xl md:text-2xl text-white mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Finding resources and services should be easy.<br />Let's make that happen <strong>together</strong>.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <Button
+              size="lg"
+              className="bg-white text-purple-600 hover:bg-purple-100"
+              onClick={scrollToResources}
+            >
+              Get Started
+            </Button>
+          </motion.div>
+        </div>
       </motion.section>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle>Search and Filter Resources</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <Label htmlFor="search">Search Resources</Label>
-              <Input
-                id="search"
-                type="text"
-                placeholder="Search resources..."
-                value={searchTerm}
-                onChange={handleSearch}
-                className="w-full mt-1"
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div ref={resourcesRef} className="container mx-auto px-4 py-8 space-y-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <Card className="shadow-lg">
+            <CardHeader>
+              <CardTitle>Search and Filter Resources</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
               <div>
-                <Label htmlFor="location">Location</Label>
-                <Select 
-                  value={locationFilter}
-                  onValueChange={(value) => {
-                    setLocationFilter(value)
-                    filterResources(searchTerm, value, assistanceTypeFilter, conditionFilter)
-                  }}
-                >
-                  <SelectTrigger id="location">
-                    <SelectValue placeholder="Select Location" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="All Locations">All Locations</SelectItem>
-                    <SelectItem value="Illinois">Illinois</SelectItem>
-                    <SelectItem value="Wisconsin">Wisconsin</SelectItem>
-                    <SelectItem value="Missouri">Missouri</SelectItem>
-                    <SelectItem value="Massachusetts">Massachusetts</SelectItem>
-                    <SelectItem value="California">California</SelectItem>
-                    <SelectItem value="National">National</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="search">Search Resources</Label>
+                <Input
+                  id="search"
+                  type="text"
+                  placeholder="Search resources..."
+                  value={searchTerm}
+                  onChange={handleSearch}
+                  className="w-full mt-1"
+                />
               </div>
-              <div>
-                <Label htmlFor="assistanceType">Assistance Type</Label>
-                <Select 
-                  value={assistanceTypeFilter}
-                  onValueChange={(value) => {
-                    setAssistanceTypeFilter(value)
-                    filterResources(searchTerm, locationFilter, value, conditionFilter)
-                  }}
-                >
-                  <SelectTrigger id="assistanceType">
-                    <SelectValue placeholder="Select Assistance Type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                  <SelectItem value="All Types">All Types</SelectItem>
-      <SelectItem value="Support Group">Support Group</SelectItem>
-      <SelectItem value="Advocacy">Advocacy</SelectItem>
-      <SelectItem value="Education">Education</SelectItem>
-      <SelectItem value="Medical">Medical</SelectItem>
-      <SelectItem value="Directory">Directory</SelectItem>
-      <SelectItem value="Care Coordination">Care Coordination</SelectItem>
-      <SelectItem value="Assistive Technology">Assistive Technology</SelectItem>
-      <SelectItem value="Therapy">Therapy</SelectItem>
-      <SelectItem value="Financial Support">Financial Support</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <Label htmlFor="location">Location</Label>
+                  <Select 
+                    value={locationFilter}
+                    onValueChange={(value) => {
+                      setLocationFilter(value)
+                      filterResources(searchTerm, value, assistanceTypeFilter, conditionFilter)
+                    }}
+                  >
+                    <SelectTrigger id="location">
+                      <SelectValue placeholder="Select Location" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="All Locations">All Locations</SelectItem>
+                      <SelectItem value="Illinois">Illinois</SelectItem>
+                      <SelectItem value="Wisconsin">Wisconsin</SelectItem>
+                      <SelectItem value="Missouri">Missouri</SelectItem>
+                      <SelectItem value="Massachusetts">Massachusetts</SelectItem>
+                      <SelectItem value="California">California</SelectItem>
+                      <SelectItem value="National">National</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="assistanceType">Assistance Type</Label>
+                  <Select 
+                    value={assistanceTypeFilter}
+                    onValueChange={(value) => {
+                      setAssistanceTypeFilter(value)
+                      filterResources(searchTerm, locationFilter, value, conditionFilter)
+                    }}
+                  >
+                    <SelectTrigger id="assistanceType">
+                      <SelectValue placeholder="Select Assistance Type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="All Types">All Types</SelectItem>
+                      <SelectItem value="Support Group">Support Group</SelectItem>
+                      <SelectItem value="Advocacy">Advocacy</SelectItem>
+                      <SelectItem value="Education">Education</SelectItem>
+                      <SelectItem value="Medical">Medical</SelectItem>
+                      <SelectItem value="Directory">Directory</SelectItem>
+                      <SelectItem value="Care Coordination">Care Coordination</SelectItem>
+                      <SelectItem value="Assistive Technology">Assistive Technology</SelectItem>
+                      <SelectItem value="Therapy">Therapy</SelectItem>
+                      <SelectItem value="Financial Support">Financial Support</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="condition">Condition</Label>
+                  <Select 
+                    value={conditionFilter}
+                    onValueChange={(value) => {
+                      setConditionFilter(value)
+                      filterResources(searchTerm, locationFilter, assistanceTypeFilter, value)
+                    }}
+                  >
+                    <SelectTrigger id="condition">
+                      <SelectValue placeholder="Select Condition" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="All Conditions">All Conditions</SelectItem>
+                      <SelectItem value="Autism">Autism</SelectItem>
+                      <SelectItem value="Cerebral Palsy">Cerebral Palsy</SelectItem>
+                      <SelectItem value="Developmental Disabilities">Developmental Disabilities</SelectItem>
+                      <SelectItem value="Limb Differences">Limb Differences</SelectItem>
+                      <SelectItem value="Chronic Health Conditions">Chronic Health Conditions</SelectItem>
+                      <SelectItem value="Neurodivergence">Neurodivergence</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div>
-                <Label htmlFor="condition">Condition</Label>
-                <Select 
-                  value={conditionFilter}
-                  onValueChange={(value) => {
-                    setConditionFilter(value)
-                    filterResources(searchTerm, locationFilter, assistanceTypeFilter, value)
-                  }}
-                >
-                  <SelectTrigger id="condition">
-                    <SelectValue placeholder="Select Condition" />
-                  </SelectTrigger>
-                  <SelectContent>
-                  <SelectItem value="All Conditions">All Conditions</SelectItem>
-      <SelectItem value="Autism">Autism</SelectItem>
-      <SelectItem value="Cerebral Palsy">Cerebral Palsy</SelectItem>
-      <SelectItem value="Developmental Disabilities">Developmental Disabilities</SelectItem>
-      <SelectItem value="Limb Differences">Limb Differences</SelectItem>
-      <SelectItem value="Chronic Health Conditions">Chronic Health Conditions</SelectItem>
-      <SelectItem value="Neurodivergence">Neurodivergence</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        <Tabs defaultValue="grid" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="grid">Grid View</TabsTrigger>
-            <TabsTrigger value="list">List View</TabsTrigger>
-          </TabsList>
-          <TabsContent value="grid">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-              {filteredResources.map((resource, index) => (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <Tabs defaultValue="grid" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="grid">Grid View</TabsTrigger>
+              <TabsTrigger value="list">List View</TabsTrigger>
+            </TabsList>
+            <TabsContent value="grid">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                {filteredResources.map((resource, index) => (
+                  <motion.div
+                    key={resource.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Card className="h-full shadow-md hover:shadow-xl transition-all duration-300">
+                      <CardHeader>
+                        <CardTitle>{resource.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <p className="text-gray-600 dark:text-gray-300">{resource.description}</p>
+                        <div className="space-y-2">
+                          <div>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Locations:</span>
+                            {renderTags(resource.locations, "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300")}
+                          </div>
+                          <div>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Types:</span>
+                            {renderTags(resource.assistanceTypes, "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300")}
+                          </div>
+                          <div>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Conditions:</span>
+                            {renderTags(resource.conditions, "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300")}
+                          </div>
+                        </div>
+                        <div className="flex flex-col space-y-2">
+                          <Button className="w-full">Contact: {resource.contact}</Button>
+                          <Link 
+                            href={resource.link} 
+                            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 font-medium flex items-center justify-center transition-colors duration-200"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {new URL(resource.link).hostname}
+                            <ExternalLink className="ml-1 h-4 w-4" />
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="list">
+              <div className="space-y-4 mt-6">
+                {filteredResources.map((resource, index) => (
+                  <motion.div
+                    key={resource.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.02, x: 10 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Card className="shadow-md hover:shadow-xl transition-all duration-300">
+                      <CardHeader>
+                        <CardTitle>{resource.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-600 dark:text-gray-300 mb-2">{resource.description}</p>
+                        <div className="space-y-2">
+                          <div>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Locations:</span>
+                            {renderTags(resource.locations, "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300")}
+                          </div>
+                          <div>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Types:</span>
+                            {renderTags(resource.assistanceTypes, 
+                            "bg-green-100 text-green-800 dark:bg-green-900  dark:text-green-300")}
+                          </div>
+                          <div>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Conditions:</span>
+                            {renderTags(resource.conditions, "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300")}
+                          </div>
+                        </div>
+                        <div className="flex flex-col space-y-2 mt-4">
+                          <Button className="w-full">Contact: {resource.contact}</Button>
+                          <Link 
+                            href={resource.link} 
+                            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 font-medium flex items-center justify-center transition-colors duration-200"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {new URL(resource.link).hostname}
+                            <ExternalLink className="ml-1 h-4 w-4" />
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </motion.div>
+
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="bg-gray-100 dark:bg-gray-800 py-12 rounded-lg"
+        >
+          <div className="container mx-auto">
+            <h2  className="text-3xl font-bold text-center mb-8">What Caregivers Say</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
                 <motion.div
-                  key={resource.id}
+                  key={i}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Card className="h-full shadow-md hover:shadow-xl transition-all duration-300">
-                    <CardHeader>
-                      <CardTitle>{resource.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <p className="text-gray-600 dark:text-gray-300">{resource.description}</p>
-                      <div className="space-y-2">
-                        <div>
-                          <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Locations:</span>
-                          {renderTags(resource.locations, "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300")}
-                        </div>
-                        <div>
-                          <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Types:</span>
-                          {renderTags(resource.assistanceTypes, "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300")}
-                        </div>
-                        <div>
-                          <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Conditions:</span>
-                          {renderTags(resource.conditions, "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300")}
-                        </div>
-                      </div>
-                      <div className="flex flex-col space-y-2">
-                        <Button className="w-full">Contact: {resource.contact}</Button>
-                        <Link 
-                          href={resource.link} 
-                          className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 font-medium flex items-center justify-center transition-colors duration-200"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {new URL(resource.link).hostname}
-                          <ExternalLink className="ml-1 h-4 w-4" />
-                        </Link>
-                      </div>
+                  <Card className="bg-white dark:bg-gray-700 cursor-pointer">
+                    <CardContent className="pt-6">
+                      <p className="italic mb-4">"Lorem ipsum odor amet, consectetuer adipiscing elit. Consectetur elementum porta, varius nostra aenean morbi. Pharetra arcu duis phasellus volutpat natoque elit ante facilisi."</p>
+                      <p className="font-semibold">- Caregiver {i}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
             </div>
-          </TabsContent>
-          <TabsContent value="list">
-            <div className="space-y-4 mt-6">
-              {filteredResources.map((resource, index) => (
-                <motion.div
-                  key={resource.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02, x: 10 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Card className="shadow-md hover:shadow-xl transition-all duration-300">
-                    <CardHeader>
-                      <CardTitle>{resource.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-600 dark:text-gray-300 mb-2">{resource.description}</p>
-                      <div className="space-y-2">
-                        <div>
-                          <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Locations:</span>
-                          {renderTags(resource.locations, "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300")}
-                        </div>
-                        <div>
-                          <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Types:</span>
-                          {renderTags(resource.assistanceTypes, "bg-green-100 text-green-800 dark:bg-green-900  dark:text-green-300")}
-                        </div>
-                        <div>
-                          <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">Conditions:</span>
-                          {renderTags(resource.conditions, "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300")}
-                        </div>
-                      </div>
-                      <div className="flex flex-col space-y-2 mt-4">
-                        <Button className="w-full">Contact: {resource.contact}</Button>
-                        <Link 
-                          href={resource.link} 
-                          className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 font-medium flex items-center justify-center transition-colors duration-200"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {new URL(resource.link).hostname}
-                          <ExternalLink className="ml-1 h-4 w-4" />
-                        </Link>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
-      </motion.div>
-
-      
-
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="bg-gray-100 dark:bg-gray-800 py-12 rounded-lg"
-      >
-        <div className="container mx-auto">
-          <h2  className="text-3xl font-bold text-center mb-8">What Caregivers Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Card className="bg-white dark:bg-gray-700 cursor-pointer">
-                  <CardContent className="pt-6">
-                    <p className="italic mb-4">"Lorem ipsum odor amet, consectetuer adipiscing elit. Consectetur elementum porta, varius nostra aenean morbi. Pharetra arcu duis phasellus volutpat natoque elit ante facilisi."</p>
-                    <p className="font-semibold">- Caregiver {i}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
           </div>
-        </div>
-      </motion.section>
+        </motion.section>
 
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        className="bg-blue-600 text-white py-12 rounded-lg"
-      >
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-          <p className="mb-6">Join our newsletter to receive the latest updates on resources and support.</p>
-          <form className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <div className="w-full sm:w-64">
-              <Label htmlFor="email" className="sr-only">Email</Label>
-              <Input id="email" type="email" placeholder="Enter your email" className="w-full bg-white text-black" />
-            </div>
-            <Button variant="secondary">Subscribe</Button>
-          </form>
-        </div>
-      </motion.section>
-    </div>
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="bg-blue-600 text-white py-12 rounded-lg"
+        >
+          <div className="container mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
+            <p className="mb-6">Join our newsletter to receive the latest updates on resources and support.</p>
+            <form className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              <div className="w-full sm:w-64">
+                <Label htmlFor="email" className="sr-only">Email</Label>
+                <Input id="email" type="email" placeholder="Enter your email" className="w-full bg-white text-black" />
+              </div>
+              <Button variant="secondary">Subscribe</Button>
+            </form>
+          </div>
+        </motion.section>
+      </div>
+    </>
   )
 }
